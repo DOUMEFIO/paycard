@@ -1,0 +1,269 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "PayCard documentation",
+        "description": "Implementation de swagger en laravel pour paycard",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/carte_create": {
+            "post": {
+                "tags": [
+                    "Carte"
+                ],
+                "summary": "Créer des carte ",
+                "description": "Permet de créer des cartes",
+                "operationId": "createCarte",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "numero": {
+                                        "type": "integer"
+                                    },
+                                    "ccv": {
+                                        "type": "integer"
+                                    },
+                                    "expire": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "categorie_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "403": {
+                        "description": "Something when wrong"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/categorie_create": {
+            "post": {
+                "tags": [
+                    "Categorie"
+                ],
+                "summary": "Créer des categories de carte",
+                "description": "Permet de créer des categorie(petit,grand)",
+                "operationId": "createCategorie",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "type": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "403": {
+                        "description": "Something when wrong"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/commande_create": {
+            "post": {
+                "tags": [
+                    "Commande"
+                ],
+                "summary": "Créer des commande de carte",
+                "description": "Permet de créer des commandes",
+                "operationId": "createCommande",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nom": {
+                                        "type": "string"
+                                    },
+                                    "prenom": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "pays": {
+                                        "type": "string"
+                                    },
+                                    "tel": {
+                                        "type": "string"
+                                    },
+                                    "adresse": {
+                                        "type": "string"
+                                    },
+                                    "avatar1": {
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "403": {
+                        "description": "Something when wrong"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Carte": {
+                "title": "Carte",
+                "description": "Les champ à fourni",
+                "properties": {
+                    "numero": {
+                        "type": "string"
+                    },
+                    "ccv": {
+                        "type": "integer"
+                    },
+                    "expire": {
+                        "type": "integer"
+                    },
+                    "categorie_id": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Categorie"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "Categorie": {
+                "title": "Categorie",
+                "description": "Les champ à fourni",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Commande": {
+                "title": "Commande",
+                "description": "Les champ à fourni",
+                "properties": {
+                    "nom": {
+                        "type": "string"
+                    },
+                    "prenom": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "email"
+                    },
+                    "pays": {
+                        "type": "string"
+                    },
+                    "tel": {
+                        "type": "string"
+                    },
+                    "adresse": {
+                        "type": "string"
+                    },
+                    "piece": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "Users",
+                "description": "Les champ à fourni",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "prenom": {
+                        "type": "string"
+                    },
+                    "numero": {
+                        "type": "string"
+                    },
+                    "fonction": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "email"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "apiAuth": {
+                "type": "http",
+                "description": "Authentication Bearer Token",
+                "name": "Authentication Bearer Token",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
